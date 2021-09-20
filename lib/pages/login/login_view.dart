@@ -12,8 +12,8 @@ class LoginView extends GetView<LoginController>{
       appBar: AppBar(
         elevation: 0.0,
         backgroundColor: Colors.white,
-
       ),
+      body: Text('title'.tr),
     );
   }
 
