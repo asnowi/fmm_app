@@ -35,6 +35,67 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
 
+  # getx
+  get: ^4.3.8
+  # loading
+  flutter_easyloading: ^3.0.3
+  # json动画
+  lottie: ^1.1.0
+  # utils
+  common_utils: ^2.0.2
+
+  # 日期
+  intl: ^0.17.0
+
+  # 屏幕适配
+  flutter_screenutil: ^5.0.0+2
+
+  # 下拉刷新
+  pull_to_refresh: ^2.0.0
+
+  # toast
+  fluttertoast: ^8.0.8
+
+  # http
+  dio: ^4.0.0
+  dio_cookie_manager: ^2.0.0
+  cookie_jar: ^3.0.1
+
+  # 缓存
+  shared_preferences: ^2.0.5
+  cached_network_image: ^3.0.0
+  flutter_cache_manager: ^3.0.2
+
+  # 加密安全 SHA
+  crypto: ^3.0.1
+
+  # WebView
+  webview_flutter: ^2.0.12
+
+  # loading
+  loading_animations: ^2.2.0
+  # share
+  share: ^2.0.1
+
+  # 设备信息
+  device_info: ^2.0.2
+  # 包信息
+  package_info: ^2.0.2
+  # 路径查询
+  path_provider: ^2.0.2
+
+  # permission 权限
+  permission_handler: ^8.1.4+2
+
+  # 错误收集
+  sentry: ^5.0.0
+
+  # 事件总线
+  event_bus: ^2.0.0
+
+  # 微光加载
+  shimmer: ^2.0.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
