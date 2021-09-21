@@ -10,15 +10,31 @@ import 'package:fmm_app/pages/home/nav/mine/mine_binding.dart';
 import 'package:fmm_app/pages/home/nav/mine/mine_view.dart';
 import 'package:fmm_app/pages/login/login_binding.dart';
 import 'package:fmm_app/pages/login/login_view.dart';
+import 'package:fmm_app/pages/splash/splash_binding.dart';
+import 'package:fmm_app/pages/splash/splash_view.dart';
+import 'package:fmm_app/welcome/welcome_binding.dart';
+import 'package:fmm_app/welcome/welcome_view.dart';
 import 'package:get/get.dart';
 
 part 'app_routes.dart';
 
 class AppPages {
 
-  static const INITIAL = AppRoutes.home;
+  static const INITIAL = AppRoutes.splash;
 
   static final List<GetPage> routes = [
+
+    GetPage(
+      name: AppRoutes.splash,
+      page: () => const SplashView(),
+      binding: SplashBinding()
+    ),
+
+    GetPage(
+      name: AppRoutes.welcome,
+      page: () => const WelcomeView(),
+      binding: WelcomeBinding()
+    ),
 
     GetPage(
       name: AppRoutes.home,
@@ -54,6 +70,7 @@ class AppPages {
       page: () => const LoginView(),
       binding: LoginBinding(),
       transitionDuration: const Duration(milliseconds: 300),
+      transition: Transition.downToUp
     )
   ];
 
@@ -61,7 +78,6 @@ class AppPages {
   static final unknownRoute = GetPage(
     name: AppRoutes.login,
     page: () => const LoginView(),
-    binding: LoginBinding(),
-    transitionDuration: const Duration(milliseconds: 300),
+    binding: LoginBinding()
   );
 }
