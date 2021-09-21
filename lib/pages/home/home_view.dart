@@ -43,11 +43,17 @@ class _HomeBodyState extends State<HomeBody>
     const MineView()
   ];
 
-  final List<String> tabIcon = [
+  final List<String> tabLottie = [
     AssetsProvider.lottiePath('tab_find'),
     AssetsProvider.lottiePath('tab_blog'),
     AssetsProvider.lottiePath('tab_follow'),
     AssetsProvider.lottiePath('tab_mine')
+  ];
+  final List<String> tabIcon = [
+    AssetsProvider.imagePath('tab_find'),
+    AssetsProvider.imagePath('tab_blog'),
+    AssetsProvider.imagePath('tab_follow'),
+    AssetsProvider.imagePath('tab_mine')
   ];
 
   @override
@@ -105,11 +111,11 @@ class _HomeBodyState extends State<HomeBody>
   Widget _buildItemBar(int index) {
     Logger.ggq('---------->>${tabIcon[index]}');
     return InkWell(
-      splashColor: ThemeData.light().colorScheme.primary,
-      child: Center(
-        child: Container(
-            child: Lottie.asset(tabIcon[index], height: 50, repeat: false)),
-      ),
+      // splashColor: ThemeData.light().colorScheme.primary,
+      // splashColor: ThemeDataProvider.getThemeData().primaryColor,
+      splashColor: Colors.blueGrey.shade100,
+      borderRadius: BorderRadius.circular(8),
+      child: _buildItemBox(_currentIndex,index),
       onTap: () {
         setState(() {
           _currentIndex = index;
@@ -118,6 +124,14 @@ class _HomeBodyState extends State<HomeBody>
               duration: const Duration(milliseconds: 260));
         });
       },
+    );
+  }
+
+  Widget _buildItemBox (int currentIndex,int index) {
+    return Center(
+      child: Container(
+        child: (currentIndex == index)? Lottie.asset(tabLottie[index], width: 50, height: 50, repeat: false): Image.asset(tabIcon[index], width: 50, height: 50),
+      ),
     );
   }
 

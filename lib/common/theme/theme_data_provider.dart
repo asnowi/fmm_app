@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fmm_app/common/theme/index.dart';
 
 class ThemeDataProvider {
     static ThemeData lightThemeData () {
@@ -16,4 +17,13 @@ class ThemeDataProvider {
     }
 
 
+    static ThemeData getThemeData () {
+      late ThemeData theme;
+      if (ThemeController.themeMode == 0) {
+        theme = ThemeDataProvider.darkThemeData();
+      } else {
+        theme = ThemeDataProvider.lightThemeData();
+      }
+      return theme;
+    }
 }
