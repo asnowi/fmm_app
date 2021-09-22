@@ -4,8 +4,6 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fmm_app/common/router/app_pages.dart';
 import 'package:fmm_app/common/theme/index.dart';
-import 'package:fmm_app/pages/home/home_binding.dart';
-import 'package:fmm_app/pages/home/home_view.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
@@ -58,7 +56,7 @@ class MyApp extends StatelessWidget {
         // trigger load more by BallisticScrollActivity
         child: GetMaterialApp(
           navigatorKey: navigatorKey,
-          title: '测试APP',
+          title: 'appName'.tr,
           debugShowCheckedModeBanner: false,
           // 网格
           debugShowMaterialGrid: false,

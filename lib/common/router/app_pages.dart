@@ -40,7 +40,7 @@ class AppPages {
       name: AppRoutes.home,
       page: () => const HomeView(),
       binding: HomeBinding(),
-
+      bindings: [FindBinding(),BlogBinding(),FollowBinding(),MineBinding()],
       children: [
         GetPage(
             name: AppRoutes.navFind,

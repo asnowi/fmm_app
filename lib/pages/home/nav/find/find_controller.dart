@@ -8,4 +8,9 @@ class FindController extends GetxController {
     Logger.ggq('---onInit---->>> find');
     super.onInit();
   }
+
+  void clearStorage () {
+    StorageUtil().clear();
+  }
+
 }

@@ -6,13 +6,13 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class Refresh extends StatelessWidget {
   final RefreshController controller;
-  final VoidCallback onRefresh;
-  final VoidCallback onLoading;
   final Widget content;
+  final VoidCallback? onRefresh;
+  final VoidCallback? onLoading;
   final bool enablePullDown;
   final bool enablePullUp;
 
-  Refresh(this.controller, this.onRefresh, this.onLoading, this.content, {this.enablePullDown = true,this.enablePullUp = true});
+  const Refresh(this.controller, this.content, {this.onRefresh, this.onLoading, this.enablePullUp = true, this.enablePullDown = true});
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +41,7 @@ class Refresh extends StatelessWidget {
                   body = textIndicator("请稍候...");
                 }
                 return Container(
-                  padding: EdgeInsets.only(top: 6,bottom: 10),
+                  padding: const EdgeInsets.only(top: 6,bottom: 10),
                   height: 76,
                   child: Center(
                     child: body,
@@ -54,12 +54,12 @@ class Refresh extends StatelessWidget {
               builder: (BuildContext context, LoadStatus? mode) {
                 Widget body;
                 if (mode == LoadStatus.idle) {
-                  body = Text("上拉加载", style: TextStyle(fontSize: 12));
+                  body = const Text("上拉加载", style: TextStyle(fontSize: 12));
                 } else if (mode == LoadStatus.loading) {
                   body = Container(
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
+                      children: const [
                         SizedBox(
                           child: CircularProgressIndicator(
                             valueColor:
@@ -75,15 +75,15 @@ class Refresh extends StatelessWidget {
                     ),
                   );
                 } else if (mode == LoadStatus.failed) {
-                  body = Text("加载失败！点击重试！", style: TextStyle(fontSize: 12));
+                  body = const Text("加载失败！点击重试！", style: TextStyle(fontSize: 12));
                 } else if (mode == LoadStatus.canLoading) {
-                  body = Text("松手,加载更多!", style: TextStyle(fontSize: 12));
+                  body = const Text("松手,加载更多!", style: TextStyle(fontSize: 12));
                 } else {
-                  body = Text("没有更多数据了!", style: TextStyle(fontSize: 12));
+                  body = const Text("没有更多数据了!", style: TextStyle(fontSize: 12));
                 }
                 return Container(
                   height: 55.0,
-                  padding: EdgeInsets.only(top: 6,bottom: 10),
+                  padding: const EdgeInsets.only(top: 6,bottom: 10),
                   child: Center(child: body),
                 );
               },
@@ -118,7 +118,7 @@ class Refresh extends StatelessWidget {
             right: 0,
             child: Text(
               statusStr,
-              style: TextStyle(fontSize: 12),
+              style: const TextStyle(fontSize: 12),
             ),
           )
         ],

@@ -53,10 +53,8 @@ class SplashController extends GetxController with WidgetsBindingObserver {
       // applyPermissions(context);
     } else if (state == AppLifecycleState.inactive) {
       Logger.ggq('app在前台但不响应事件，比如电话，touch id等');
-      timerCancel();
     } else if (state == AppLifecycleState.paused) {
       Logger.ggq('app进入后台');
-      timerCancel();
     } else if (state == AppLifecycleState.detached) {
       Logger.ggq('没有宿主视图但是flutter引擎仍然有效');
       timerCancel();
