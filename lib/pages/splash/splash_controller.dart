@@ -1,13 +1,14 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:fmm_app/common/app/index.dart';
 import 'package:fmm_app/common/router/app_pages.dart';
 import 'package:fmm_app/common/utils/index.dart';
 import 'package:get/get.dart';
 
 class SplashController extends GetxController with WidgetsBindingObserver {
   late Timer _timer;
-  int _count = 5;
+  int _count = AppConfig.SPLASH_TIMER;
   int _tick = 0;
   // set count(value) => _count = value;
 
@@ -23,12 +24,12 @@ class SplashController extends GetxController with WidgetsBindingObserver {
 
   @override
   void onInit() {
-    _count = 5;
+    _count = AppConfig.SPLASH_TIMER;
     _tick = 0;
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       Logger.ggq('-----splash----->>${timer.tick}');
       subCount();
-      if (timer.tick >= 5) {
+      if (timer.tick >= AppConfig.SPLASH_TIMER) {
         _timer.cancel();
         launchTarget();
       }
@@ -39,10 +40,10 @@ class SplashController extends GetxController with WidgetsBindingObserver {
 
   void launchTarget() {
     if (Global.hasStarted) {
-     Get.offNamed(AppRoutes.home);
-   } else {
-      Get.offNamed(AppRoutes.welcome);
-   }
+        Get.offNamed(AppRoutes.home);
+     } else {
+        Get.offNamed(AppRoutes.welcome);
+     }
   }
 
   @override
@@ -64,7 +65,7 @@ class SplashController extends GetxController with WidgetsBindingObserver {
   }
 
   void timerCancel () {
-    _count = 5;
+    _count = AppConfig.SPLASH_TIMER;
     _tick = 0;
     _timer.cancel();
     Logger.ggq('------------->>');

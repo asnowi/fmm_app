@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fmm_app/common/app/index.dart';
 import 'package:fmm_app/common/utils/index.dart';
 import 'package:fmm_app/pages/splash/splash_controller.dart';
 import 'package:get/get.dart';
@@ -51,7 +52,7 @@ class SplashView extends GetView<SplashController> {
         CircularProgressIndicator(
           strokeWidth: 1,
           valueColor: const AlwaysStoppedAnimation<Color>(Colors.blue),
-          value:  controller.tick / 5,
+          value:  controller.tick / AppConfig.SPLASH_TIMER,
         ),
         ElevatedButton(onPressed: (){
           controller.launchTarget();

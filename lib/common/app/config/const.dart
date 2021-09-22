@@ -10,3 +10,7 @@ class BundleKey {
 class EventCode {
     static const int EVENT_LOGIN = 999;
 }
+
+class AppConfig {
+    static const int SPLASH_TIMER = 3;
+}
