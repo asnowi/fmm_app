@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:fmm_app/common/app/config/const.dart';
+import 'package:fmm_app/common/db/index.dart';
 import 'package:fmm_app/common/theme/index.dart';
 import 'package:get/get.dart';
 
@@ -22,13 +23,18 @@ class Global {
   /// 是否 android
   static bool isAndroid = Platform.isAndroid;
 
+  /// db
+  static late DBUtil dbUtil;
+
   /// init
   static Future init() async {
     // 运行初始
     WidgetsFlutterBinding.ensureInitialized();
     // 工具初始
     await StorageUtil().init();
-
+    // hive
+    await DBUtil.install();
+    dbUtil = await DBUtil.getInstance();
     // 第一次打开应用
     hasStarted = StorageUtil().getBool(SaveInfoKey.HAS_STARTED)?? false;
     //  android 状态栏为透明的沉浸

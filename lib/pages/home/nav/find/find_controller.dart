@@ -10,7 +10,7 @@ class FindController extends GetxController {
   }
 
   void clearStorage () {
-    StorageUtil().clear();
+    Global.dbUtil.clearUser();
   }
 
 }

@@ -19,7 +19,7 @@ Future<void> main() async {
 }
 
 Future<void> initServices() async {
-  print('starting services ...');
+  Logger.ggq('starting services ...');
   await Get.putAsync(() => GlobalService().init());
   await Global.init();
 }
@@ -76,7 +76,7 @@ class MyApp extends StatelessWidget {
           fallbackLocale: TranslationService.fallbackLocale,
           translations: TranslationService(),
           localeListResolutionCallback: (locales, supportedLocales) {
-            print('当前系统语言环境:${locales}');
+            Logger.ggq('当前系统语言环境:${locales}');
             return;
           },
           // 主题
