@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:fmm_app/common/utils/index.dart';
 import 'package:fmm_app/common/widget/tab/index.dart';
 import 'package:fmm_app/pages/home/home_controller.dart';
@@ -17,17 +18,17 @@ class HomeView extends GetView<HomeController> {
   }
 
   Widget _buildBody() {
-    return HomeBody(
-      controller: controller,
-    );
+    return HomeBody(controller);
   }
 }
 
 class HomeBody extends StatefulWidget {
-  const HomeBody({Key? key, HomeController? controller}) : super(key: key);
+  final HomeController homeController;
+  const HomeBody(this.homeController, {Key? key}) : super(key: key);
 
   @override
   _HomeBodyState createState() => _HomeBodyState();
+
 }
 
 class _HomeBodyState extends State<HomeBody>
@@ -35,6 +36,8 @@ class _HomeBodyState extends State<HomeBody>
   int _currentIndex = 0;
   late final PageController _pageController;
   late final AnimationController _animationController;
+  /// 点击退出 APP
+  DateTime? _popTime;
 
   final List<Widget> _pageList = [
     const FindView(),
@@ -74,18 +77,31 @@ class _HomeBodyState extends State<HomeBody>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      extendBody: false,
-      resizeToAvoidBottomInset: false,
-      body: PageView(
-          physics: const NeverScrollableScrollPhysics(),
-          controller: _pageController,
-          children: _pageList,
-          onPageChanged: (page) {
-            Logger.ggq("page:${page}");
-          }),
-      bottomNavigationBar: _buildBottomAppBar(context),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+    return WillPopScope(
+      child: Scaffold(
+        extendBody: false,
+        resizeToAvoidBottomInset: false,
+        body: PageView(
+            physics: const NeverScrollableScrollPhysics(),
+            controller: _pageController,
+            children: _pageList,
+            onPageChanged: (page) {
+              Logger.ggq('page:${page}');
+            }),
+        bottomNavigationBar: _buildBottomAppBar(context),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      ),
+      onWillPop: () async {
+        if(_popTime == null || DateTime.now().difference(_popTime?? DateTime.now()) > const Duration(seconds: 2)){
+          //两次点击时间间隔超过1秒则重新计时
+          ToastUtil.show('再按一次退出');
+          _popTime = DateTime.now();
+          return false;
+        }
+        // 退出app
+        await SystemChannels.platform.invokeMethod('SystemNavigator.pop');
+        return true;
+      }
     );
   }
 

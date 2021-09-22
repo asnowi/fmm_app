@@ -49,6 +49,7 @@ class WelcomeView extends GetView<WelcomeController> {
   Widget _buildItem(BuildContext context, int index) {
     if(index == 4) {
       return Stack(
+        alignment: Alignment.center,
         children: [
           Center(child: Text('${index}')),
           Positioned(
