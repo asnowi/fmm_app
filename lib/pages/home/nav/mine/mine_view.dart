@@ -6,7 +6,7 @@ import 'package:fmm_app/pages/home/nav/mine/mine_controller.dart';
 import 'package:get/get.dart';
 
 class MineView extends GetView<MineController> {
-  const MineView({Key? key}) : super(key: key);
+  MineView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -57,19 +57,24 @@ class MineView extends GetView<MineController> {
       child: Container(
         child: Column(
           children: [
-          //  _buildHeader(),
-          //  _buildGride(),
-          //  _buildColumn(),
-          //  _buildFooter(),
-            TextButton(onPressed: (){
-              if(Global.dbUtil.isLogin()) {
-                Global.dbUtil.clearUser();
+           _buildHeader(),
+           _buildGride(),
+           _buildColumn(),
+           _buildFooter(),
+            TextButton(onPressed: () async{
+              if(Global.dbUtil.isLogin()){
+                int result = await Global.dbUtil.clearUser();
+                Logger.ggq('------clearUser---->>${result}');
               } else {
-                final User user = User('0x0011','13717591366','1234567','avatarImg');
-                Global.dbUtil.saveUser(user);
+                final User user = User('0x0012','13717591362','1234562','avatarImg');
+                int result = await Global.dbUtil.saveUser(user);
+                Logger.ggq('-----saveUser----->>${result}');
               }
               controller.updateUser();
-            }, child: Text('点击'))
+            }, child: GetBuilder<MineController>(
+                id: 'user',
+                builder: (_) => Text(Global.dbUtil.isLogin()? '已登录' : '未登录')
+            ))
           ],
         ),
         color: AppColors.background,
@@ -77,7 +82,7 @@ class MineView extends GetView<MineController> {
     );
   }
 
-  Widget _buildHeader (){
+  Widget _buildHeader(){
     return GetBuilder<MineController> (
         id: 'user',
         builder: (_) => Container(
@@ -87,22 +92,28 @@ class MineView extends GetView<MineController> {
     );
   }
 
-  Widget _buildHeaderIn () {
-    return Text('已登录');
-  }
-
-  Widget _buildHeaderUn (){
+  Widget _buildHeaderIn() {
     return Row(
       children: [
         Image.asset(AssetsProvider.imagePath('ic_avatar'), width: 82.w, height: 82.w),
         Padding(padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 2.h)),
-        Text(controller.userInfo?.phone??'未知')
+        Text(Global.dbUtil.getUser()?.phone??'')
+      ],
+    );
+  }
+
+  Widget _buildHeaderUn(){
+    return Row(
+      children: [
+        Image.asset(AssetsProvider.imagePath('ic_avatar'), width: 82.w, height: 82.w),
+        Padding(padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 2.h)),
+        const Text('点击登录')
       ],
     );
   }
 
 
-  Widget _buildFooter (){
+  Widget _buildFooter(){
     return GetBuilder<MineController> (
         id: 'user',
         builder: (_) => Container(
@@ -111,19 +122,19 @@ class MineView extends GetView<MineController> {
     );
   }
 
-  Widget _buildFooterIn () {
+  Widget _buildFooterIn(){
     return Text('退出登录');
   }
 
-  Widget _buildFooterUn (){
+  Widget _buildFooterUn(){
     return Text('点击登录');
   }
 
-  Widget _buildGride() {
+  Widget _buildGride(){
     return Text('_buildGride');
   }
 
-  Widget _buildColumn (){
+  Widget _buildColumn(){
     return Text('_buildColumn');
   }
 }

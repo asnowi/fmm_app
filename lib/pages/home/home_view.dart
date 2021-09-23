@@ -42,10 +42,10 @@ class _HomeBodyState extends State<HomeBody>
   DateTime? _popTime;
 
   final List<Widget> _pageList = [
-    const FindView(),
-    const BlogView(),
-    const FollowView(),
-    const MineView()
+     FindView(),
+     BlogView(),
+     FollowView(),
+     MineView()
   ];
 
   final List<String> tabLottie = [

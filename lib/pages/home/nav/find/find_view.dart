@@ -3,7 +3,7 @@ import 'package:fmm_app/pages/home/nav/find/find_controller.dart';
 import 'package:get/get.dart';
 
 class FindView extends GetView<FindController> {
-  const FindView({Key? key}) : super(key: key);
+  FindView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

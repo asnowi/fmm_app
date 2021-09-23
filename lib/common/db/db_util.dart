@@ -25,7 +25,6 @@ class DBUtil {
     /// <https://docs.hivedb.dev/#/custom-objects/type_adapters>
     /// Hive.registerAdapter(SettingsAdapter());
     Hive.registerAdapter(UserAdapter());
-
   }
 
   /// 初始化 Box
@@ -53,6 +52,7 @@ class DBUtil {
 
   /// 保存用户
   Future<int> saveUser (User user) async{
+    //// 0
     return await Global.dbUtil.userBox.add(user);
   }
 
@@ -66,6 +66,7 @@ class DBUtil {
   
   /// 清除用户
   Future<int> clearUser() async{
+    /// >= 1
     return await Global.dbUtil.userBox.clear();
   }
 
