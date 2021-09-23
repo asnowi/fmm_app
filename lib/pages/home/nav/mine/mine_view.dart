@@ -57,10 +57,10 @@ class MineView extends GetView<MineController> {
       child: Container(
         child: Column(
           children: [
-            _buildHeader(),
-            _buildGride(),
-            _buildColumn(),
-            _buildFooter(),
+          //  _buildHeader(),
+          //  _buildGride(),
+          //  _buildColumn(),
+          //  _buildFooter(),
             TextButton(onPressed: (){
               if(Global.dbUtil.isLogin()) {
                 Global.dbUtil.clearUser();

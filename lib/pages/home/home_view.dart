@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:fmm_app/common/theme/index.dart';
 import 'package:fmm_app/common/utils/index.dart';
+import 'package:fmm_app/common/values/index.dart';
 import 'package:fmm_app/common/widget/tab/index.dart';
 import 'package:fmm_app/pages/home/home_controller.dart';
 import 'package:fmm_app/pages/home/nav/blog/blog_view.dart';
@@ -111,7 +113,7 @@ class _HomeBodyState extends State<HomeBody>
     return BottomAppBar(
       elevation: 6,
       notchMargin: 6.0,
-      color: Colors.white,
+      color: AppColors.background,
       shape: const CustomCircularNotchedRectangle(),
       child: Row(
         children: [
@@ -126,20 +128,19 @@ class _HomeBodyState extends State<HomeBody>
 
   Widget _buildItemBar(int index) {
     Logger.ggq('---------->>${tabIcon[index]}');
-    return InkWell(
-      // splashColor: ThemeData.light().colorScheme.primary,
-      // splashColor: ThemeDataProvider.getThemeData().primaryColor,
-      splashColor: Colors.blueGrey.shade100,
-      borderRadius: BorderRadius.circular(8),
-      child: _buildItemBox(_currentIndex,index),
-      onTap: () {
-        setState(() {
-          _currentIndex = index;
-          _pageController.animateToPage(_currentIndex,
-              curve: Curves.fastOutSlowIn,
-              duration: const Duration(milliseconds: 260));
-        });
-      },
+    return MaterialButton(onPressed: (){
+      setState(() {
+        _currentIndex = index;
+        _pageController.animateToPage(_currentIndex,
+            curve: Curves.fastOutSlowIn,
+            duration: const Duration(milliseconds: 260));
+      });
+    }, child: _buildItemBox(_currentIndex,index),
+       // splashColor: ThemeDataProvider.getThemeData().primaryColor,
+       splashColor: Colors.blueGrey.shade100,
+       highlightColor: Colors.blueGrey.shade50,
+       elevation: 0.0,
+       shape: const CircleBorder()
     );
   }
 

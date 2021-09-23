@@ -3,14 +3,10 @@ import 'package:get/get.dart';
 
 class FindController extends GetxController {
 
+
   @override
   void onInit() {
     Logger.ggq('---onInit---->>> find');
     super.onInit();
   }
-
-  void clearStorage () {
-    Global.dbUtil.clearUser();
-  }
-
 }

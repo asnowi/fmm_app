@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:fmm_app/common/db/index.dart';
+import 'package:fmm_app/common/utils/index.dart';
 import 'package:fmm_app/global.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:hive/hive.dart';
@@ -41,6 +42,9 @@ class DBUtil {
   /// 获取当前用户
   User? getUser(){
     final users = Global.dbUtil.userBox.values;
+    users.forEach((element) {
+      Logger.ggq('----user---->>${element.userId}');
+    });
     if(users.isNotEmpty) {
       return users.last;
     }

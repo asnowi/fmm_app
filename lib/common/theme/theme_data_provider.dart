@@ -5,14 +5,16 @@ class ThemeDataProvider {
     static ThemeData lightThemeData () {
       return ThemeData(
           brightness: Brightness.light,
-          primaryColor: Colors.white
+          primaryColor: Colors.white,
+          backgroundColor: Colors.white
       );
     }
 
     static ThemeData darkThemeData () {
       return ThemeData(
           brightness: Brightness.dark,
-          primaryColor: Colors.blueGrey
+          primaryColor: Colors.blueGrey,
+          backgroundColor: Colors.blueGrey
       );
     }
 

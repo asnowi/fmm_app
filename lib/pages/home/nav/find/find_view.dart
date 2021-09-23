@@ -10,7 +10,6 @@ class FindView extends GetView<FindController> {
     return Center(
       child: Container(
         child: TextButton(onPressed: (){
-          controller.clearStorage();
         }, child: Text('发现'))
       ),
     );
