@@ -44,22 +44,22 @@ class AppPages {
       children: [
         GetPage(
             name: AppRoutes.navFind,
-            page: () => const FindView(),
+            page: () => FindView(),
             binding: FindBinding()
         ),
         GetPage(
             name: AppRoutes.navBlog,
-            page: () => const BlogView(),
+            page: () => BlogView(),
             binding: BlogBinding()
         ),
         GetPage(
             name: AppRoutes.navFollow,
-            page: () => const FollowView(),
+            page: () => FollowView(),
             binding: FollowBinding()
         ),
         GetPage(
             name: AppRoutes.navMine,
-            page: () => const MineView(),
+            page: () => MineView(),
             binding: MineBinding()
         )
       ]
