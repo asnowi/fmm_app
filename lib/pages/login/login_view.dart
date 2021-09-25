@@ -3,7 +3,7 @@ import 'package:fmm_app/pages/login/login_controller.dart';
 import 'package:get/get.dart';
 
 class LoginView extends GetView<LoginController>{
-  const LoginView({Key? key}) : super(key: key);
+  LoginView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

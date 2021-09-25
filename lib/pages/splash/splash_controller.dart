@@ -38,6 +38,11 @@ class SplashController extends GetxController with WidgetsBindingObserver {
     super.onInit();
   }
 
+  @override
+  void onReady() {
+    super.onReady();
+  }
+
   void launchTarget() {
     if (Global.hasStarted) {
         Get.offNamed(AppRoutes.home);

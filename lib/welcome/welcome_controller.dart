@@ -6,8 +6,13 @@ class WelcomeController extends GetxController {
 
   @override
   void onInit() {
+    super.onInit();
+  }
+
+  @override
+  void onReady() {
     StorageUtil().setBool(SaveInfoKey.HAS_STARTED, true);
     Global.hasStarted = true;
-    super.onInit();
+    super.onReady();
   }
 }

@@ -67,7 +67,7 @@ class AppPages {
 
     GetPage(
       name: AppRoutes.login,
-      page: () => const LoginView(),
+      page: () => LoginView(),
       binding: LoginBinding(),
       transitionDuration: const Duration(milliseconds: 300),
       transition: Transition.downToUp
@@ -77,7 +77,7 @@ class AppPages {
   // 找不到去登录页
   static final unknownRoute = GetPage(
     name: AppRoutes.login,
-    page: () => const LoginView(),
+    page: () => LoginView(),
     binding: LoginBinding()
   );
 }
