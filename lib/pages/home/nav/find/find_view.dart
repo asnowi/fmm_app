@@ -10,7 +10,8 @@ class FindView extends GetView<FindController> {
     return Center(
       child: Container(
         child: TextButton(onPressed: (){
-        }, child: Text('发现'))
+          controller.launch();
+        }, child: Text('test'))
       ),
     );
   }

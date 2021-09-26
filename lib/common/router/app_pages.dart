@@ -12,6 +12,8 @@ import 'package:fmm_app/pages/login/login_binding.dart';
 import 'package:fmm_app/pages/login/login_view.dart';
 import 'package:fmm_app/pages/splash/splash_binding.dart';
 import 'package:fmm_app/pages/splash/splash_view.dart';
+import 'package:fmm_app/pages/test/test_binding.dart';
+import 'package:fmm_app/pages/test/test_view.dart';
 import 'package:fmm_app/welcome/welcome_binding.dart';
 import 'package:fmm_app/welcome/welcome_view.dart';
 import 'package:get/get.dart';
@@ -63,6 +65,12 @@ class AppPages {
             binding: MineBinding()
         )
       ]
+    ),
+
+    GetPage(
+        name: AppRoutes.test,
+        page: () => const TestView(),
+        binding: TestBinding()
     ),
 
     GetPage(
