@@ -3,7 +3,8 @@ import 'package:fmm_app/common/utils/index.dart';
 import 'package:lottie/lottie.dart';
 
 class ErrorPage extends StatelessWidget {
-  const ErrorPage({Key? key}) : super(key: key);
+  final String? error;
+  ErrorPage({Key? key, this.error}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +37,7 @@ class ErrorPage extends StatelessWidget {
                   //默认状态使用灰色
                   return Colors.white;
                 })),
-              child: Text('数据异常，点击重试',style: TextStyle(fontSize: 12),)),
+              child: Text('数据异常，点击重试->${error}',style: TextStyle(fontSize: 12),)),
           ],
         ),
       ),
