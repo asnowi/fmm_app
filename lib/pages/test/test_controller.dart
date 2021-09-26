@@ -7,7 +7,6 @@ import 'package:get/get.dart';
 
 class TestController extends GetxController with StateMixin<PageState>{
 
-  final PageState _state = PageState();
 
   late Timer _timer;
 

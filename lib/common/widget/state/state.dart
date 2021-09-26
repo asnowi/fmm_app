@@ -1,8 +1,6 @@
-import 'package:get/get.dart';
-
 class PageState {
 
-  RxInt _state = RxInt(STATE_LOADING);
+  int _state = STATE_LOADING;
 
   get state => _state;
   set state(value) => _state = value;
@@ -13,4 +11,3 @@ class PageState {
   static const int STATE_ERROR = 2;
 
 }
-
