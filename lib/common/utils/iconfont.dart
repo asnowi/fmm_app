@@ -43,13 +43,13 @@ class Iconfont{
     matchTextDirection: true,
   );
 
-  static const eye_show = IconData(
+  static const eyeShow = IconData(
     0xf286,
     fontFamily: 'iconfont',
     matchTextDirection: true,
   );
 
-  static const eye_hide = IconData(
+  static const eyeHide = IconData(
     0xf313,
     fontFamily: 'iconfont',
     matchTextDirection: true,
