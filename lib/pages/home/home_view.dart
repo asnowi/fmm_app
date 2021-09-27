@@ -153,5 +153,5 @@ class _HomeBodyState extends State<HomeBody>
 
   /// 是否缓存tab页面数据
   @override
-  bool get wantKeepAlive => false;
+  bool get wantKeepAlive => true;
 }

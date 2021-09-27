@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fmm_app/common/db/index.dart';
+import 'package:fmm_app/common/router/app_pages.dart';
 import 'package:fmm_app/common/utils/index.dart';
 import 'package:fmm_app/common/values/index.dart';
 import 'package:fmm_app/pages/home/nav/mine/mine_controller.dart';
@@ -30,7 +31,8 @@ class MineView extends GetView<MineController> {
           IconButton(
             splashRadius: 20,
             onPressed: () {
-              ToastUtil.show('scan');
+              // ToastUtil.show('scan');
+              Get.toNamed(AppRoutes.login);
             },
             icon: const Icon(
               Icons.zoom_out_map,
