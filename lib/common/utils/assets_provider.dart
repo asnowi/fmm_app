@@ -16,7 +16,7 @@ class AssetsProvider {
   }
 
   /// 本地json 数据
-  static String loadVideo(String name){
-    return 'assets/videos/$name.json';
+  static String loadVideo(String name, {String type = 'mp4'}){
+    return 'assets/videos/$name.$type';
   }
 }

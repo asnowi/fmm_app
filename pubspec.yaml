@@ -107,7 +107,6 @@ dependencies:
   # viode
   video_player: ^2.2.5
 
-
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -137,6 +136,7 @@ flutter:
   assets:
     - assets/images/
     - assets/jsons/
+    - assets/videos/
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 

@@ -66,7 +66,8 @@ class LoginController extends GetxController{
   }
   @override
   void onInit() {
-    videoPlayerController = VideoPlayerController.network(AppConfig.VIDEO_URL);
+    // videoPlayerController = VideoPlayerController.network(AppConfig.VIDEO_URL);
+    videoPlayerController = VideoPlayerController.asset(AssetsProvider.loadVideo('video-login-hd'));
     super.onInit();
   }
 
