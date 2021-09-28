@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fmm_app/common/router/app_pages.dart';
 import 'package:fmm_app/common/utils/index.dart';
@@ -7,6 +8,9 @@ import 'package:get/get.dart';
 
 class MineView extends GetView<MineController> {
   MineView({Key? key}) : super(key: key);
+
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
 
   final List<String> _gridList = [
     '1',
@@ -22,21 +26,24 @@ class MineView extends GetView<MineController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        key: _scaffoldKey,
+        drawer: _buildDrawer(context),
         appBar: AppBar(
-          elevation: 0.0,
-          centerTitle: true,
-          backgroundColor: AppColors.background,
           leading: IconButton(
             splashRadius: 20,
             onPressed: () {
-              ToastUtil.show('menu');
+              // ToastUtil.show('menu');
+              _scaffoldKey.currentState?.openDrawer();
             },
             icon: const Icon(
-              Icons.menu,
+              Icons.menu_sharp,
               size: 18,
               color: Colors.grey,
             ),
           ),
+          elevation: 0.0,
+          centerTitle: true,
+          backgroundColor: AppColors.background,
           actions: <Widget>[
             IconButton(
               splashRadius: 20,
@@ -59,6 +66,32 @@ class MineView extends GetView<MineController> {
             child: _buildContent()));
   }
 
+  Widget _buildDrawer(BuildContext context) {
+    return Drawer(
+      child: ListView(
+        children: const <Widget>[
+          DrawerHeader(
+            decoration: BoxDecoration(
+              color: Colors.white,
+            ),
+            child: Center(
+              child: SizedBox(
+                width: 60,
+                height: 60,
+                child: CircleAvatar(
+                  child: Text('R'),
+                ),
+              ),
+            ),
+          ),
+          ListTile(
+            leading: Icon(Icons.settings),
+            title: Text('设置'),
+          )
+        ],
+      ),
+    );
+  }
   Widget _buildContent() {
     return SingleChildScrollView(
       scrollDirection: Axis.vertical,
@@ -99,8 +132,8 @@ class MineView extends GetView<MineController> {
   Widget _buildHeader() {
     return GetBuilder<MineController>(
         id: 'user',
-        builder: (_) => Container(
-            padding: EdgeInsets.symmetric(horizontal: 0.1.sw),
+        builder: (_) => SizedBox(
+            width: Get.width * 0.9,
             child:
                 Global.dbUtil.isLogin() ? _buildHeaderIn() : _buildHeaderUn()));
   }
@@ -158,50 +191,121 @@ class MineView extends GetView<MineController> {
 
   Widget _buildGrid() {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 10.h),
-      child: GridView.builder(
-        //解决无限高度问题
-          shrinkWrap: true,
-          //禁用滑动事件
-          physics: const NeverScrollableScrollPhysics(),
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 4, //每行4列
-            childAspectRatio: 1.3, //显示区域宽高相等
-          ),
-          padding: EdgeInsets.zero,
-          itemCount: _gridList.length,
-          itemBuilder: (context, index) {
-            return Center(
-                child: ElevatedButton(
-                  onPressed: (){},
-                  child: CircleAvatar(
-                    backgroundImage: const NetworkImage('http://p1.music.126.net/GE2kVDwdVQyoNJC8k31mEA==/18979769718754963.jpg'),
-                    child: Container(
-                      child: Text('${_gridList[index]}'),
-                    ),
-                  ),
-                  style: ButtonStyle(
-                      shape: MaterialStateProperty.all(CircleBorder()),
-                      backgroundColor: MaterialStateProperty.resolveWith((states) {
-                        if (states.contains(MaterialState.disabled)) {
-                          return Colors.red[100];
-                        }
-                        return Colors.redAccent;
-                      })),
-                ));
-          }),
+      padding: EdgeInsets.symmetric(vertical: 2.h),
+      child: Card(
+        color: Colors.white, // 背景色
+        shadowColor: Colors.blueGrey.shade50, // 阴影颜色
+        elevation: 0.2, // 阴影高度
+        borderOnForeground: false, // 是否在 child 前绘制 border，默认为 true
+        child: Padding(
+          padding: EdgeInsets.symmetric(vertical: 8.h),
+          child: GridView.builder(
+            //解决无限高度问题
+              shrinkWrap: true,
+              //禁用滑动事件
+              physics: const NeverScrollableScrollPhysics(),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 4, //每行4列
+                childAspectRatio: 1.5, //显示区域宽高相等
+              ),
+              padding: EdgeInsets.zero,
+              itemCount: _gridList.length,
+              itemBuilder: (context, index) {
+                return Center(
+                    child: MaterialButton(
+                      onPressed: (){
+                        ToastUtil.show('${index}');
+                      },
+                      splashColor: Colors.blueGrey.shade100,
+                      highlightColor: Colors.blueGrey.shade50,
+                      elevation: 4.0,
+                      shape: const CircleBorder(),
+                      child: Padding(
+                        padding: const EdgeInsets.all(5),
+                        child: ClipOval(
+                          child: ImageLoader.load(url: 'http://p1.music.126.net/GE2kVDwdVQyoNJC8k31mEA==/18979769718754963.jpg'),
+                        ),
+                      ),)
+                );
+              }),
+        ),
+      )
     );
   }
 
   Widget _buildColumn() {
     return ConstrainedBox(
-      constraints: BoxConstraints(minHeight: Get.height * 0.32),
+      constraints: BoxConstraints(minHeight: Get.height * 0.34),
       child: Container(
+        width: Get.width,
         child: Column(
           children: [
-            Text('111111'),
+            MaterialButton(
+                onPressed: (){
+                  ToastUtil.show('设置');
+                },
+                child: SizedBox(
+                  width: Get.width * 0.9,
+                  height: 50.h,
+                  child: Row(
+                    children: const [
+                      Icon(Icons.settings, size: 16,),
+                      Padding(padding: EdgeInsets.symmetric(horizontal: 4)),
+                      Text('设置')
+                    ],
+                  ),
+                )
+            ),
+            MaterialButton(
+                onPressed: (){
+                  ToastUtil.show('设置');
+                },
+                child: SizedBox(
+                  width: Get.width * 0.9,
+                  height: 50.h,
+                  child: Row(
+                    children: const [
+                      Icon(Icons.settings, size: 16,),
+                      Padding(padding: EdgeInsets.symmetric(horizontal: 4)),
+                      Text('设置')
+                    ],
+                  ),
+                )
+            ),
+            MaterialButton(
+                onPressed: (){
+                  ToastUtil.show('设置');
+                },
+                child: SizedBox(
+                  width: Get.width * 0.9,
+                  height: 50.h,
+                  child: Row(
+                    children: const [
+                      Icon(Icons.settings, size: 16,),
+                      Padding(padding: EdgeInsets.symmetric(horizontal: 4)),
+                      Text('设置')
+                    ],
+                  ),
+                )
+            ),
+            MaterialButton(
+                onPressed: (){
+                  ToastUtil.show('设置');
+                },
+                child: SizedBox(
+                  width: Get.width * 0.9,
+                  height: 50.h,
+                  child: Row(
+                    children: const [
+                      Icon(Icons.settings, size: 16,),
+                      Padding(padding: EdgeInsets.symmetric(horizontal: 4)),
+                      Text('设置')
+                    ],
+                  ),
+                )
+            )
           ],
-        ),
+        )
       ),
     );
   }
