@@ -54,7 +54,7 @@ class LoginController extends GetxController{
   }
 
   void onLogin () async{
-    final User user = User('userId001', '13717591366', 'tokenxx', 'http://p1.music.126.net/GE2kVDwdVQyoNJC8k31mEA==/18979769718754963.jpg');
+    final User user = User('userId001', accountController.text, 'tokenxx', 'http://p1.music.126.net/GE2kVDwdVQyoNJC8k31mEA==/18979769718754963.jpg');
     int result = await Global.dbUtil.saveUser(user);
     Logger.ggq('-----saveUser----->>${result}');
     if(result >= 0) {
