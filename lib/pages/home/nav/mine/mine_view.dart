@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:fmm_app/common/router/app_pages.dart';
 import 'package:fmm_app/common/utils/index.dart';
 import 'package:fmm_app/common/values/index.dart';
@@ -67,38 +68,91 @@ class MineView extends GetView<MineController> {
   }
 
   Widget _buildDrawer(BuildContext context) {
+    double _drawerHeight = Get.height - Get.statusBarHeight - Get.bottomBarHeight;
+    Logger.ggq('---height---->>${Get.height}');
+    Logger.ggq('---_scaffoldKey-height--->>${ _scaffoldKey.currentContext?.height}');
+    Logger.ggq('---_scaffoldKey-width--->>${ _scaffoldKey.currentContext?.width}');
+    Logger.ggq('---statusBarHeight---->>${Get.statusBarHeight}');
+    Logger.ggq('---bottomBarHeight---->>${Get.bottomBarHeight}');
     return Drawer(
-      child: ListView(
-        children: const <Widget>[
-          DrawerHeader(
-            decoration: BoxDecoration(
-              color: Colors.white,
-            ),
-            child: Center(
-              child: SizedBox(
-                width: 60,
-                height: 60,
-                child: CircleAvatar(
-                  child: Text('R'),
-                ),
-              ),
+      child: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        /// 滚动方向，默认是垂直方向
+        physics: const BouncingScrollPhysics(),
+        child: Container(
+          child: Column(
+            children: [
+              _buildDrawerHeader(),
+              _buildDrawerContent(_drawerHeight),
+              _buildDrawerLogout()
+            ],
+          ),
+        ),
+      )
+    );
+  }
+  Widget _buildDrawerContent(double _height) {
+    return ConstrainedBox(
+      constraints: BoxConstraints(minHeight: _height),
+      child: Column(
+        children: [
+          Text('aaa'),
+          Text('aaa'),
+          Text('aaa'),
+          Text('aaa')
+        ],
+      ),
+    );
+  }
+  Widget _buildDrawerHeader() {
+    return const DrawerHeader(
+        margin: EdgeInsets.zero,
+        padding: EdgeInsets.zero,
+        decoration: BoxDecoration(
+          color: Colors.white,
+        ),
+        child: Center(
+          child: SizedBox(
+            width: 60,
+            height: 60,
+            child: CircleAvatar(
+              child: Text('R'),
             ),
           ),
-          ListTile(
-            leading: Icon(Icons.settings),
-            title: Text('设置'),
+        )
+    );
+  }
+  Widget _buildDrawerLogout() {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 30.w),
+      child: TextButton(onPressed: (){},
+          style: ButtonStyle(
+              backgroundColor: MaterialStateProperty.resolveWith((states){
+                if(states.contains(MaterialState.disabled)){
+                  return Colors.white60;
+                }
+                return Colors.white;
+              })
+          ),
+          child: SizedBox(
+            width: Get.width,
+            height: 30.h,
+            child: Center(
+              child: Text('退出登录',style: TextStyle(
+                fontSize: 14.sp,
+                color: Colors.redAccent,
+                fontWeight: FontWeight.bold,
+              ),),
+            ),
           )
-        ],
       ),
     );
   }
   Widget _buildContent() {
     return SingleChildScrollView(
       scrollDirection: Axis.vertical,
-
       /// 滚动方向，默认是垂直方向
       physics: const BouncingScrollPhysics(),
-
       /// 弹性
       controller: controller.scrollController,
       child: Container(
@@ -106,8 +160,7 @@ class MineView extends GetView<MineController> {
           children: [
             _buildHeader(),
             _buildGrid(),
-            _buildColumn(),
-            _buildFooter()
+            _buildColumn()
             // TextButton(onPressed: () async{
             //   if(Global.dbUtil.isLogin()){
             //     int result = await Global.dbUtil.clearUser();
@@ -133,7 +186,7 @@ class MineView extends GetView<MineController> {
     return GetBuilder<MineController>(
         id: 'user',
         builder: (_) => SizedBox(
-            width: Get.width * 0.9,
+            width: 0.9.sw,
             child:
                 Global.dbUtil.isLogin() ? _buildHeaderIn() : _buildHeaderUn()));
   }
@@ -157,35 +210,6 @@ class MineView extends GetView<MineController> {
         Padding(padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 2.h)),
         const Text('点击登录')
       ],
-    );
-  }
-
-  Widget _buildFooter() {
-    return Container(
-      width: Get.width * 0.9,
-      padding: EdgeInsets.symmetric(vertical: 10.h),
-      child: GetBuilder<MineController>(
-          id: 'user',
-          builder: (_) => ElevatedButton(
-              onPressed: () {},
-              style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.resolveWith((states) {
-                if (states.contains(MaterialState.disabled)) {
-                  return Colors.red[100];
-                }
-                return Colors.redAccent;
-              })),
-              child: Padding(
-                padding: EdgeInsets.symmetric(vertical: 12.h),
-                child: const Text(
-                  '登录',
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ))),
     );
   }
 
@@ -245,7 +269,7 @@ class MineView extends GetView<MineController> {
                   ToastUtil.show('设置');
                 },
                 child: SizedBox(
-                  width: Get.width * 0.9,
+                  width: 0.9.sw,
                   height: 50.h,
                   child: Row(
                     children: const [
@@ -261,7 +285,7 @@ class MineView extends GetView<MineController> {
                   ToastUtil.show('设置');
                 },
                 child: SizedBox(
-                  width: Get.width * 0.9,
+                  width: 0.9.sw,
                   height: 50.h,
                   child: Row(
                     children: const [
@@ -277,7 +301,7 @@ class MineView extends GetView<MineController> {
                   ToastUtil.show('设置');
                 },
                 child: SizedBox(
-                  width: Get.width * 0.9,
+                  width: 0.9.sw,
                   height: 50.h,
                   child: Row(
                     children: const [
@@ -293,7 +317,87 @@ class MineView extends GetView<MineController> {
                   ToastUtil.show('设置');
                 },
                 child: SizedBox(
-                  width: Get.width * 0.9,
+                  width: 0.9.sw,
+                  height: 50.h,
+                  child: Row(
+                    children: const [
+                      Icon(Icons.settings, size: 16,),
+                      Padding(padding: EdgeInsets.symmetric(horizontal: 4)),
+                      Text('设置')
+                    ],
+                  ),
+                )
+            ),
+            MaterialButton(
+                onPressed: (){
+                  ToastUtil.show('设置');
+                },
+                child: SizedBox(
+                  width: 0.9.sw,
+                  height: 50.h,
+                  child: Row(
+                    children: const [
+                      Icon(Icons.settings, size: 16,),
+                      Padding(padding: EdgeInsets.symmetric(horizontal: 4)),
+                      Text('设置')
+                    ],
+                  ),
+                )
+            ),
+            MaterialButton(
+                onPressed: (){
+                  ToastUtil.show('设置');
+                },
+                child: SizedBox(
+                  width: 0.9.sw,
+                  height: 50.h,
+                  child: Row(
+                    children: const [
+                      Icon(Icons.settings, size: 16,),
+                      Padding(padding: EdgeInsets.symmetric(horizontal: 4)),
+                      Text('设置')
+                    ],
+                  ),
+                )
+            ),
+            MaterialButton(
+                onPressed: (){
+                  ToastUtil.show('设置');
+                },
+                child: SizedBox(
+                  width: 0.9.sw,
+                  height: 50.h,
+                  child: Row(
+                    children: const [
+                      Icon(Icons.settings, size: 16,),
+                      Padding(padding: EdgeInsets.symmetric(horizontal: 4)),
+                      Text('设置')
+                    ],
+                  ),
+                )
+            ),
+            MaterialButton(
+                onPressed: (){
+                  ToastUtil.show('设置');
+                },
+                child: SizedBox(
+                  width: 0.9.sw,
+                  height: 50.h,
+                  child: Row(
+                    children: const [
+                      Icon(Icons.settings, size: 16,),
+                      Padding(padding: EdgeInsets.symmetric(horizontal: 4)),
+                      Text('设置')
+                    ],
+                  ),
+                )
+            ),
+            MaterialButton(
+                onPressed: (){
+                  ToastUtil.show('设置');
+                },
+                child: SizedBox(
+                  width: 0.9.sw,
                   height: 50.h,
                   child: Row(
                     children: const [
