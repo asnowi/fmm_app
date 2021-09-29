@@ -83,7 +83,7 @@ class MineView extends GetView<MineController> {
           child: Column(
             children: [
               _buildDrawerHeader(),
-              _buildDrawerContent(_drawerHeight),
+              _buildDrawerContent(_drawerHeight * 0.6),
               _buildDrawerLogout()
             ],
           ),
