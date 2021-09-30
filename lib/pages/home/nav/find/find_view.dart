@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fmm_app/pages/home/home_controller.dart';
 import 'package:fmm_app/pages/home/nav/find/find_controller.dart';
 import 'package:get/get.dart';
 

@@ -1,6 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:fmm_app/pages/home/nav/blog/blog_controller.dart';
 import 'package:get/get.dart';
 
@@ -10,8 +8,15 @@ class BlogView extends GetView<BlogController> {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Container(
-        child: Text('博客'),
+      child: AnimatedOpacity(
+        key: UniqueKey(),
+        ///透明度
+        opacity: controller.opacityLevel,
+        ///过渡时间
+        duration: const Duration(milliseconds: 2000),
+        ///动画插值器
+        curve: Curves.linear,
+        child: const Text('博客'),
       ),
     );
   }

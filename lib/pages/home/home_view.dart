@@ -60,11 +60,16 @@ class _HomeBodyState extends State<HomeBody>
     AssetsProvider.imagePath('tab_mine')
   ];
 
+
+
   @override
   void initState() {
     _pageController = PageController(
       initialPage: 0,
     );
+    _pageController.addListener(() {
+      Logger.ggq('----page----->${_pageController.position}');
+    });
     _animationController = AnimationController(vsync: this);
     super.initState();
   }
