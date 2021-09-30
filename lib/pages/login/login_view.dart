@@ -156,12 +156,9 @@ class LoginView extends GetView<LoginController>{
   }
   Widget _buildInputAccount(){
     const String _phone = '13717591366';
-    const String _pwd = '123456';
     if(!StringUtils.isEmpty(_phone)){
       controller.accountController.text = _phone;
-    }
-    if(!StringUtils.isEmpty(_pwd)){
-      controller.passwordController.text = _pwd;
+      controller.setAccount(controller.accountController.text.isNotEmpty);
     }
     return ConstrainedBox(
       constraints: BoxConstraints(

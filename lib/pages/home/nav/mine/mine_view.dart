@@ -1,6 +1,3 @@
-import 'dart:math';
-
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -15,7 +12,6 @@ class MineView extends GetView<MineController> {
   MineView({Key? key}) : super(key: key);
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-
 
   final List<String> _gridList = [
     '1',
@@ -36,12 +32,15 @@ class MineView extends GetView<MineController> {
         appBar: AppBar(
           leading: IconButton(
             splashRadius: 20,
-            onPressed: () {
+            onPressed: () async{
               // ToastUtil.show('menu');
-              if(controller.user == null) {
-                Get.toNamed(AppRoutes.login);
-              } else {
+              if(controller.isLogin()) {
                 _scaffoldKey.currentState?.openDrawer();
+              } else {
+                final result = await Get.toNamed(AppRoutes.login);
+                if(result) {
+                  controller.updateUser();
+                }
               }
             },
             icon: const Icon(
@@ -56,9 +55,8 @@ class MineView extends GetView<MineController> {
           actions: <Widget>[
             IconButton(
               splashRadius: 20,
-              onPressed: () {
-                // ToastUtil.show('scan');
-                Get.toNamed(AppRoutes.login);
+              onPressed: () async{
+                ToastUtil.show('scan');
               },
               icon: const Icon(
                 Icons.zoom_out_map,
@@ -185,19 +183,18 @@ class MineView extends GetView<MineController> {
   }
 
   Widget _buildHeader() {
-
     return GetBuilder<MineController>(
         id: 'user',
         builder: (_) => SizedBox(
             width: 0.9.sw,
             child:
-            (controller.user == null)? _buildHeaderUn() : _buildHeaderIn(controller.user!)));
+            (controller.isLogin())? _buildHeaderIn(controller.user!) : _buildHeaderUn()));
   }
 
   Widget _buildHeaderIn(User user) {
     return Row(
       children: [
-        ClipOval(child: CachedNetworkImage(imageUrl: user.avatarImg, width: 82.r, height: 82.r)),
+        ClipOval(child: ImageLoader.load(url: user.avatarImg, width: 82.r, height: 82.r)),
         Padding(padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 2.h)),
         Text(Global.dbUtil.getUser()?.phone ?? '')
       ],
@@ -249,7 +246,11 @@ class MineView extends GetView<MineController> {
                 return Center(
                     child: MaterialButton(
                       onPressed: (){
-                        ToastUtil.show('${index}');
+                        if(controller.isLogin()) {
+                          ToastUtil.show('${index}');
+                        } else {
+                          ToastUtil.show('请登录');
+                        }
                       },
                       splashColor: Colors.blueGrey.shade100,
                       highlightColor: Colors.blueGrey.shade50,
@@ -258,7 +259,7 @@ class MineView extends GetView<MineController> {
                       child: Padding(
                         padding: const EdgeInsets.all(5),
                         child: ClipOval(
-                          child: ImageLoader.load(url: 'http://p1.music.126.net/GE2kVDwdVQyoNJC8k31mEA==/18979769718754963.jpg'),
+                          child: Image.asset(AssetsProvider.imagePath('nav')),
                         ),
                       ),)
                 );
@@ -277,135 +278,12 @@ class MineView extends GetView<MineController> {
           children: [
             MaterialButton(
                 onPressed: (){
-                  ToastUtil.show('设置');
-                },
-                child: SizedBox(
-                  width: 0.9.sw,
-                  height: 50.h,
-                  child: Row(
-                    children: const [
-                      Icon(Icons.settings, size: 16,),
-                      Padding(padding: EdgeInsets.symmetric(horizontal: 4)),
-                      Text('设置')
-                    ],
-                  ),
-                )
-            ),
-            MaterialButton(
-                onPressed: (){
-                  ToastUtil.show('设置');
-                },
-                child: SizedBox(
-                  width: 0.9.sw,
-                  height: 50.h,
-                  child: Row(
-                    children: const [
-                      Icon(Icons.settings, size: 16,),
-                      Padding(padding: EdgeInsets.symmetric(horizontal: 4)),
-                      Text('设置')
-                    ],
-                  ),
-                )
-            ),
-            MaterialButton(
-                onPressed: (){
-                  ToastUtil.show('设置');
-                },
-                child: SizedBox(
-                  width: 0.9.sw,
-                  height: 50.h,
-                  child: Row(
-                    children: const [
-                      Icon(Icons.settings, size: 16,),
-                      Padding(padding: EdgeInsets.symmetric(horizontal: 4)),
-                      Text('设置')
-                    ],
-                  ),
-                )
-            ),
-            MaterialButton(
-                onPressed: (){
-                  ToastUtil.show('设置');
-                },
-                child: SizedBox(
-                  width: 0.9.sw,
-                  height: 50.h,
-                  child: Row(
-                    children: const [
-                      Icon(Icons.settings, size: 16,),
-                      Padding(padding: EdgeInsets.symmetric(horizontal: 4)),
-                      Text('设置')
-                    ],
-                  ),
-                )
-            ),
-            MaterialButton(
-                onPressed: (){
-                  ToastUtil.show('设置');
-                },
-                child: SizedBox(
-                  width: 0.9.sw,
-                  height: 50.h,
-                  child: Row(
-                    children: const [
-                      Icon(Icons.settings, size: 16,),
-                      Padding(padding: EdgeInsets.symmetric(horizontal: 4)),
-                      Text('设置')
-                    ],
-                  ),
-                )
-            ),
-            MaterialButton(
-                onPressed: (){
-                  ToastUtil.show('设置');
-                },
-                child: SizedBox(
-                  width: 0.9.sw,
-                  height: 50.h,
-                  child: Row(
-                    children: const [
-                      Icon(Icons.settings, size: 16,),
-                      Padding(padding: EdgeInsets.symmetric(horizontal: 4)),
-                      Text('设置')
-                    ],
-                  ),
-                )
-            ),
-            MaterialButton(
-                onPressed: (){
-                  ToastUtil.show('设置');
-                },
-                child: SizedBox(
-                  width: 0.9.sw,
-                  height: 50.h,
-                  child: Row(
-                    children: const [
-                      Icon(Icons.settings, size: 16,),
-                      Padding(padding: EdgeInsets.symmetric(horizontal: 4)),
-                      Text('设置')
-                    ],
-                  ),
-                )
-            ),
-            MaterialButton(
-                onPressed: (){
-                  ToastUtil.show('设置');
-                },
-                child: SizedBox(
-                  width: 0.9.sw,
-                  height: 50.h,
-                  child: Row(
-                    children: const [
-                      Icon(Icons.settings, size: 16,),
-                      Padding(padding: EdgeInsets.symmetric(horizontal: 4)),
-                      Text('设置')
-                    ],
-                  ),
-                )
-            ),
-            MaterialButton(
-                onPressed: (){
-                  ToastUtil.show('设置');
+                  // ToastUtil.show('设置');
+                  if(controller.isLogin()) {
+                    ToastUtil.show('设置');
+                  } else {
+                    ToastUtil.show('请登录');
+                  }
                 },
                 child: SizedBox(
                   width: 0.9.sw,

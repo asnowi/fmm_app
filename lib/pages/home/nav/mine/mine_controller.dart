@@ -33,4 +33,9 @@ class MineController extends GetxController {
     update(['user']);
   }
 
+  bool isLogin() {
+    return user != null;
+  }
+
+
 }
