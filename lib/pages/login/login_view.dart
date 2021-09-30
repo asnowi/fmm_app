@@ -155,11 +155,14 @@ class LoginView extends GetView<LoginController>{
     );
   }
   Widget _buildInputAccount(){
-    // final String _phone = '13717591366';
-    // if(_phone != null && _phone.isNotEmpty){
-    //   controller.accountController.text = _phone;
-    //   controller.changeHasAccountSuffixIcon(true);
-    // }
+    const String _phone = '13717591366';
+    const String _pwd = '123456';
+    if(!StringUtils.isEmpty(_phone)){
+      controller.accountController.text = _phone;
+    }
+    if(!StringUtils.isEmpty(_pwd)){
+      controller.passwordController.text = _pwd;
+    }
     return ConstrainedBox(
       constraints: BoxConstraints(
           maxHeight: 48.h,

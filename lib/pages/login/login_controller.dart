@@ -58,8 +58,7 @@ class LoginController extends GetxController{
     int result = await Global.dbUtil.saveUser(user);
     Logger.ggq('-----saveUser----->>${result}');
     if(result >= 0) {
-      ToastUtil.show('登录成功！');
-      Get.back(result: true);
+      Get.back( result: true );
     }else {
       ToastUtil.show('登录失败！');
     }

@@ -1,6 +1,10 @@
+import 'dart:math';
+
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:fmm_app/common/db/index.dart';
 import 'package:fmm_app/common/router/app_pages.dart';
 import 'package:fmm_app/common/utils/index.dart';
 import 'package:fmm_app/common/values/index.dart';
@@ -34,7 +38,11 @@ class MineView extends GetView<MineController> {
             splashRadius: 20,
             onPressed: () {
               // ToastUtil.show('menu');
-              _scaffoldKey.currentState?.openDrawer();
+              if(controller.user == null) {
+                Get.toNamed(AppRoutes.login);
+              } else {
+                _scaffoldKey.currentState?.openDrawer();
+              }
             },
             icon: const Icon(
               Icons.menu_sharp,
@@ -125,7 +133,15 @@ class MineView extends GetView<MineController> {
   Widget _buildDrawerLogout() {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 30.w),
-      child: TextButton(onPressed: (){},
+      child: TextButton(onPressed: () async{
+        int result = await Global.dbUtil.clearUser();
+        if(result >= 1 ){
+          _scaffoldKey.currentState?.openEndDrawer();
+          controller.updateUser();
+        } else {
+          ToastUtil.show('请重试！');
+        }
+      },
           style: ButtonStyle(
               backgroundColor: MaterialStateProperty.resolveWith((states){
                 if(states.contains(MaterialState.disabled)){
@@ -161,20 +177,6 @@ class MineView extends GetView<MineController> {
             _buildHeader(),
             _buildGrid(),
             _buildColumn()
-            // TextButton(onPressed: () async{
-            //   if(Global.dbUtil.isLogin()){
-            //     int result = await Global.dbUtil.clearUser();
-            //     Logger.ggq('------clearUser---->>${result}');
-            //   } else {
-            //     final User user = User('0x0012','13717591362','1234562','avatarImg');
-            //     int result = await Global.dbUtil.saveUser(user);
-            //     Logger.ggq('-----saveUser----->>${result}');
-            //   }
-            //   controller.updateUser();
-            // }, child: GetBuilder<MineController>(
-            //     id: 'user',
-            //     builder: (_) => Text(Global.dbUtil.isLogin()? '已登录' : '未登录')
-            // ))
           ],
         ),
         color: AppColors.background,
@@ -183,19 +185,19 @@ class MineView extends GetView<MineController> {
   }
 
   Widget _buildHeader() {
+
     return GetBuilder<MineController>(
         id: 'user',
         builder: (_) => SizedBox(
             width: 0.9.sw,
             child:
-                Global.dbUtil.isLogin() ? _buildHeaderIn() : _buildHeaderUn()));
+            (controller.user == null)? _buildHeaderUn() : _buildHeaderIn(controller.user!)));
   }
 
-  Widget _buildHeaderIn() {
+  Widget _buildHeaderIn(User user) {
     return Row(
       children: [
-        Image.asset(AssetsProvider.imagePath('ic_avatar'),
-            width: 82.w, height: 82.w),
+        ClipOval(child: CachedNetworkImage(imageUrl: user.avatarImg, width: 82.r, height: 82.r)),
         Padding(padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 2.h)),
         Text(Global.dbUtil.getUser()?.phone ?? '')
       ],
@@ -203,13 +205,22 @@ class MineView extends GetView<MineController> {
   }
 
   Widget _buildHeaderUn() {
-    return Row(
-      children: [
-        Image.asset(AssetsProvider.imagePath('ic_avatar'),
-            width: 82.w, height: 82.w),
-        Padding(padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 2.h)),
-        const Text('点击登录')
-      ],
+    return InkWell(
+      onTap: () async {
+        final result = await Get.toNamed(AppRoutes.login);
+        Logger.ggq('--result-->>${result}');
+        if(result) {
+          controller.updateUser();
+        }
+      },
+      child: Row(
+        children: [
+          Image.asset(AssetsProvider.imagePath('ic_avatar'),
+              width: 82.w, height: 82.w),
+          Padding(padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 2.h)),
+          const Text('点击登录')
+        ],
+      ),
     );
   }
 

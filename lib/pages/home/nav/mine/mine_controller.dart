@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fmm_app/common/db/index.dart';
 import 'package:fmm_app/common/utils/index.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -15,11 +16,12 @@ class MineController extends GetxController {
 
   final ScrollController scrollController = ScrollController();
 
-
+  User? user;
 
   @override
   void onInit() {
     Logger.ggq('---onInit---->>> mine');
+    user = Global.dbUtil.getUser();
     super.onInit();
   }
 
@@ -27,6 +29,7 @@ class MineController extends GetxController {
 
 
   void updateUser() {
+    user = Global.dbUtil.getUser();
     update(['user']);
   }
 
