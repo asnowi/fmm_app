@@ -102,10 +102,11 @@ class MineView extends GetView<MineController> {
       constraints: BoxConstraints(minHeight: _height),
       child: Column(
         children: [
-          Text('aaa'),
-          Text('aaa'),
-          Text('aaa'),
-          Text('aaa')
+          Container(
+            padding: EdgeInsets.symmetric(vertical: 20.h),
+            height: 200.h,
+            child: const Text('侧滑菜单'),
+          )
         ],
       ),
     );
@@ -196,7 +197,7 @@ class MineView extends GetView<MineController> {
       children: [
         ClipOval(child: ImageLoader.load(url: user.avatarImg, width: 82.r, height: 82.r)),
         Padding(padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 2.h)),
-        Text(Global.dbUtil.getUser()?.phone ?? '')
+        Text(user.phone)
       ],
     );
   }
@@ -269,6 +270,14 @@ class MineView extends GetView<MineController> {
     );
   }
 
+  Widget _buildDivider(){
+    return Divider(
+      height: .5,
+      thickness: .5,
+      color: Colors.grey[100],
+    );
+  }
+
   Widget _buildColumn() {
     return ConstrainedBox(
       constraints: BoxConstraints(minHeight: Get.height * 0.34),
@@ -296,7 +305,117 @@ class MineView extends GetView<MineController> {
                     ],
                   ),
                 )
-            )
+            ),
+            _buildDivider(),
+            MaterialButton(
+                onPressed: (){
+                  // ToastUtil.show('设置');
+                  if(controller.isLogin()) {
+                    ToastUtil.show('设置');
+                  } else {
+                    ToastUtil.show('请登录');
+                  }
+                },
+                child: SizedBox(
+                  width: 0.9.sw,
+                  height: 50.h,
+                  child: Row(
+                    children: const [
+                      Icon(Icons.settings, size: 16,),
+                      Padding(padding: EdgeInsets.symmetric(horizontal: 4)),
+                      Text('设置')
+                    ],
+                  ),
+                )
+            ),
+            _buildDivider(),
+            MaterialButton(
+                onPressed: (){
+                  // ToastUtil.show('设置');
+                  if(controller.isLogin()) {
+                    ToastUtil.show('设置');
+                  } else {
+                    ToastUtil.show('请登录');
+                  }
+                },
+                child: SizedBox(
+                  width: 0.9.sw,
+                  height: 50.h,
+                  child: Row(
+                    children: const [
+                      Icon(Icons.settings, size: 16,),
+                      Padding(padding: EdgeInsets.symmetric(horizontal: 4)),
+                      Text('设置')
+                    ],
+                  ),
+                )
+            ),
+            _buildDivider(),
+            MaterialButton(
+                onPressed: (){
+                  // ToastUtil.show('设置');
+                  if(controller.isLogin()) {
+                    ToastUtil.show('设置');
+                  } else {
+                    ToastUtil.show('请登录');
+                  }
+                },
+                child: SizedBox(
+                  width: 0.9.sw,
+                  height: 50.h,
+                  child: Row(
+                    children: const [
+                      Icon(Icons.settings, size: 16,),
+                      Padding(padding: EdgeInsets.symmetric(horizontal: 4)),
+                      Text('设置')
+                    ],
+                  ),
+                )
+            ),
+            _buildDivider(),
+            MaterialButton(
+                onPressed: (){
+                  // ToastUtil.show('设置');
+                  if(controller.isLogin()) {
+                    ToastUtil.show('设置');
+                  } else {
+                    ToastUtil.show('请登录');
+                  }
+                },
+                child: SizedBox(
+                  width: 0.9.sw,
+                  height: 50.h,
+                  child: Row(
+                    children: const [
+                      Icon(Icons.settings, size: 16,),
+                      Padding(padding: EdgeInsets.symmetric(horizontal: 4)),
+                      Text('设置')
+                    ],
+                  ),
+                )
+            ),
+            _buildDivider(),
+            MaterialButton(
+                onPressed: (){
+                  // ToastUtil.show('设置');
+                  if(controller.isLogin()) {
+                    ToastUtil.show('设置');
+                  } else {
+                    ToastUtil.show('请登录');
+                  }
+                },
+                child: SizedBox(
+                  width: 0.9.sw,
+                  height: 50.h,
+                  child: Row(
+                    children: const [
+                      Icon(Icons.settings, size: 16,),
+                      Padding(padding: EdgeInsets.symmetric(horizontal: 4)),
+                      Text('设置')
+                    ],
+                  ),
+                )
+            ),
           ],
         )
       ),

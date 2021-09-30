@@ -13,8 +13,8 @@ class UserAdapter extends TypeAdapter<User>{
   @override
   void write(BinaryWriter writer, User obj) {
       writer.write(obj.userId);
-      writer.write(obj.token);
       writer.write(obj.phone);
+      writer.write(obj.token);
       writer.write(obj.avatarImg);
   }
 }
